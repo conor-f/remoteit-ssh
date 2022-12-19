@@ -8,36 +8,40 @@ from requests_http_signature import HTTPSignatureAuth
 from base64 import b64decode
 
 
-key_id = os.environ.get('R3_ACCESS_KEY_ID', None)
-key_secret_id = os.environ.get('R3_SECRET_ACCESS_KEY', None)
+key_id = os.environ.get("R3_ACCESS_KEY_ID", None)
+key_secret_id = os.environ.get("R3_SECRET_ACCESS_KEY", None)
 
 
 def run_query(body):
-    host = 'api.remote.it'
-    url_path = '/graphql/v1'
-    content_type_header = 'application/json'
+    host = "api.remote.it"
+    url_path = "/graphql/v1"
+    content_type_header = "application/json"
     content_length_header = str(len(body))
 
     headers = {
-        'host': host,
-        'path': url_path,
-        'content-type': content_type_header,
-        'content-length': content_length_header,
+        "host": host,
+        "path": url_path,
+        "content-type": content_type_header,
+        "content-length": content_length_header,
     }
 
     response = requests.post(
-        'https://' + host + url_path,
+        "https://" + host + url_path,
         json=body,
         auth=HTTPSignatureAuth(
             algorithm="hmac-sha256",
             key=b64decode(key_secret_id),
             key_id=key_id,
             headers=[
-                '(request-target)', 'host',
-                'date', 'content-type',
-                'content-length'
-            ]),
-        headers=headers)
+                "(request-target)",
+                "host",
+                "date",
+                "content-type",
+                "content-length",
+            ],
+        ),
+        headers=headers,
+    )
 
     return response
 
@@ -102,7 +106,9 @@ def parse_args():
 
 def main():
     if not key_id or not key_secret_id:
-        print("You must set your env varialbes of R3_ACCESS_KEY_ID and R3_SECRET_ACCESS_KEY!")
+        print(
+            "You must set your env varialbes of R3_ACCESS_KEY_ID and R3_SECRET_ACCESS_KEY!"
+        )
         sys.exit(1)
 
     args = parse_args()
