@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: remoteit-ssh
+Version: 0.1.0
+Summary: Opens an SSH connection to a remoteit device by name.
+Home-page: https://github.com/conor-f/remoteit-ssh
+Requires-Python: >=3.6
