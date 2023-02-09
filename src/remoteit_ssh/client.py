@@ -43,6 +43,10 @@ def run_query(body):
         headers=headers,
     )
 
+    if response.status_code == 403:
+        print("Incorrect auth. Check your R3_* environment variables.")
+        sys.exit(1)
+
     return response
 
 
