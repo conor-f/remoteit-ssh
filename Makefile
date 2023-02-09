@@ -12,6 +12,7 @@ clean:
 lint:
 	black src/
 
+.PHONY: build
 build:
 	$(IN_ENV) $(PYTHON) -m pip install --editable .
 	rm -fr dist/
