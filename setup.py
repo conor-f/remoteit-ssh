@@ -27,7 +27,7 @@ INSTALL_REQUIRES = [
 setup(
     name='remoteit-ssh',
     description='Opens an SSH connection to a remoteit device by name.',
-    version='0.2.0',
+    version='0.2.1',
     url='https://github.com/conor-f/remoteit-ssh',
     python_requires='>=3.6',
     packages=find_packages('src'),

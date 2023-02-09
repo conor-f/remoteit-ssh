@@ -5,7 +5,7 @@ grep -R "remoteit-ssh" ~/.zshrc || echo '''
 function _remoteit_ssh_wrapper() {
   output=$(_remoteit-ssh $1)
 
-  if [[ "$output" == "ssh -p"* ]]; then
+  if [[ "$output" == "ssh -o"* ]]; then
     eval $output
   else
     echo $output
