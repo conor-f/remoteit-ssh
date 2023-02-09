@@ -1,9 +1,0 @@
-setup.py
-src/remoteit_ssh/__init__.py
-src/remoteit_ssh/client.py
-src/remoteit_ssh.egg-info/PKG-INFO
-src/remoteit_ssh.egg-info/SOURCES.txt
-src/remoteit_ssh.egg-info/dependency_links.txt
-src/remoteit_ssh.egg-info/entry_points.txt
-src/remoteit_ssh.egg-info/requires.txt
-src/remoteit_ssh.egg-info/top_level.txt
