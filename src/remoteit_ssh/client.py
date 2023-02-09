@@ -136,7 +136,7 @@ def main():
     host = details["host"]
     port = details["port"]
 
-    print(f"ssh -p{port} pi@{host}")
+    print(f"ssh -oStrictHostKeyChecking=no -p{port} pi@{host}")
 
 
 if __name__ == "__main__":
