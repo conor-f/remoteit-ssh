@@ -50,13 +50,13 @@ def run_query(body):
     return response
 
 
-def get_active_device_from_device_name(device_name):
+def get_device_details_from_device_name(device_name):
     response = run_query(
         {
             "query": f"""
 query {{
     login {{
-        devices(state: "active", name: "{device_name}") {{
+        devices(name: "{device_name}") {{
             items {{
                 id
                 name
@@ -75,10 +75,13 @@ query {{
 
 
 def get_ssh_details_from_device_name(device_name):
-    device_details = get_active_device_from_device_name(device_name)
+    device_details = get_device_details_from_device_name(device_name)
 
-    remote_id = device_details[0]
-    remote_id = remote_id["services"][0]["id"]
+    if not device_details:
+        print(f"Device matching {device_name} not found. Exiting.")
+        sys.exit(1)
+
+    remote_id = device_details[0]["services"][0]["id"]
 
     response = run_query(
         {
@@ -95,7 +98,19 @@ mutation {{
         }
     )
 
-    return response.json()["data"]["connect"]
+    response = response.json()
+    if "errors" in response:
+        print("Error while trying to get device details:")
+
+        if "inactive" in response["errors"][0]["message"]:
+            print("\tDevice found but is inactive. Exiting.")
+            sys.exit(1)
+        else:
+            print("\tUnknown error. Dumping entire error object:")
+            print(response["errors"])
+            sys.exit(1)
+
+    return response["data"]["connect"]
 
 
 def parse_args():
