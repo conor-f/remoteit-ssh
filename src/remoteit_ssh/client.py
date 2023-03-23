@@ -143,7 +143,9 @@ def parse_args():
 
 def get_from_config_file(filepath, profile, option):
     config = configparser.ConfigParser()
-    config.read(filepath)
+
+    # Needed to account for ~/ in filepath.
+    config.read(os.path.expanduser(filepath))
 
     if not config:
         print(f"Cannot parse config file at {filepath}")
