@@ -67,7 +67,7 @@ query {{
 }}"""
         },
         key_id,
-        key_secret_id
+        key_secret_id,
     )
 
     return response.json()["data"]["login"]["devices"]["items"]
@@ -75,9 +75,7 @@ query {{
 
 def get_ssh_details_from_device_name(device_name, key_id, key_secret_id):
     device_details = get_device_details_from_device_name(
-        device_name,
-        key_id,
-        key_secret_id
+        device_name, key_id, key_secret_id
     )
 
     if not device_details:
@@ -100,7 +98,7 @@ mutation {{
 }}"""
         },
         key_id,
-        key_secret_id
+        key_secret_id,
     )
 
     response = response.json()
@@ -165,9 +163,7 @@ def get_key_id(args):
 
 def get_key_secret_id(args):
     key_secret_id = get_from_config_file(
-        args.file,
-        args.profile,
-        "R3_SECRET_ACCESS_KEY"
+        args.file, args.profile, "R3_SECRET_ACCESS_KEY"
     )
 
     if not key_secret_id:
