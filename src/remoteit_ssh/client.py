@@ -118,6 +118,20 @@ def parse_args():
         description="Matches a partial device name on Remoteit and opens an SSH connection to it."
     )
 
+    parser.add_argument(
+        "-f",
+        "--file",
+        default="~/.config/remoteit_ssh/config.ini",
+        help="Filepath for a config file to use",
+    )
+
+    parser.add_argument(
+        "-p",
+        "--profile",
+        default="default",
+        help="Which profile to use. Must match a section in your config file.",
+    )
+
     parser.add_argument("device_name")
 
     return parser.parse_args()
