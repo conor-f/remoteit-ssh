@@ -142,7 +142,12 @@ def parse_args():
 
 
 def get_from_config_file(filepath, profile, option):
-    config = configparser.ConfigParser().read(filepath)
+    config = configparser.ConfigParser()
+    config.read(filepath)
+
+    if not config:
+        print(f"Cannot parse config file at {filepath}")
+        sys.exit(1)
 
     if profile not in config.sections():
         print(f"Profile {profile} not found in config file {filepath}")
