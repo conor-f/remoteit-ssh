@@ -4,6 +4,13 @@ A simple tool to let you automatically SSH into remote.it devices based on
 their names.
 
 
+## Installation
+
+```
+python3 -m pip install remoteit-ssh
+```
+
+
 ## Config
 
 Set up your config as an `ini` file as follows:
